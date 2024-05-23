@@ -44,8 +44,8 @@ if option == "Perhitungan Kerapatan Curah":
     st.title("Perhitungan Kerapatan Curah")
 
 #pengguna memasukkan data yang dibutuhkan
-    Berat_Wadah_Kosong = st.number_input("Masukkan Berat Wadah Kosong (g)")
-    st.write(f"[Berat Wadah Kosong adalah] {Berat_Wadah_Kosong} g")
+    Bobot_Wadah_Kosong = st.number_input("Masukkan Bobot Wadah Kosong (g)",step=1e-6,format="%.4f")
+    st.write(f"[Bobot Wadah Kosong adalah] {Bobot_Wadah_Kosong} gram")
     Volume_Sampel = st.number_input("Masukkan Volume Sampel (mL)")
     st.write(f"[Volume Sampel adalah] {Volume_Sampel} mL")
     Bobot_gelas_Wadah_Sampel = st.number_input("Masukkan Bobot Wadah dan Sampel(g)",step=1e-6,format="%.4f")
@@ -56,7 +56,7 @@ if option == "Perhitungan Kerapatan Curah":
 
 #perhitungan dimulai bila data sudah di isi
     if tombol:
-        nilai_Kerapatan = (Bobot_gelas_air_Sampel) / ((Volume_air_akhir) - (Volume_air_awal)); nilai_Kerapatan = (Bobot_gelas_air_Sampel) / ((Volume_air_akhir) - (Volume_air_awal))
+        nilai_Kerapatan = (Bobot_gelas_Wadah_Sampel)-(Bobot_Wadah_Kosong)/ (Volume_Sampel); nilai_Kerapatan = (Bobot_gelas_Wadah_Sampel)-(Bobot_Wadah_Kosong) / ((Volume_Sampel))
         st.success(f"Nilai Kerapatan Curah adalah {nilai_Kerapatan}g/mL")
 
 #jika yang dipilih option perhitungan kerapatan Absolut
@@ -79,7 +79,7 @@ if option == "Perhitungan Kerapatan Absolut":
 #perhitungan dimulai bila data sudah di isi
     if tombol:
         nilai_Kerapatan = ((Bobot_gelas_air_Sampel) - (Bobot_gelas_air))/ ((Volume_air_akhir) - (Volume_air_awal))
-        st.success(f"Nilai Kerapatan Absolut adalah {nilai_Kerapatan}g/mL")
+        st.success(f"Nilai Kerapatan Absolut adalah {nilai_Kerapatan} g/mL")
 
 #jika yang dipilih option perhitungan kerapatan Relatif
 if option == "Perhitungan Kerapatan Relatif":
@@ -107,10 +107,10 @@ if option == "Tabel Kerapatan Air":
 
 #membuat data frame
     data = {
-    "Temperatur": [20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 27.5, 28.0, 29.0, 30.0, 31.0, 32.0, 33.0, 34.0, 35.0, 36.0, 37.0, 38.0, 39.0, 40.0],
-    "Kerapatan air": [0.9982, 0.9980, 0.9978, 0.9976, 0.9973, 0.9971, 0.9968, 0.9965, 0.9964, 0.9963, 0.9960, 0.9957, 0.9954, 0.9951, 0.9947, 0.9944, 0.9941, 0.9937, 0.9934, 0.9930, 0.9026, 0.9922],}
+    "Temperatur (°C)": [20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 27.5, 28.0, 29.0, 30.0, 31.0, 32.0, 33.0, 34.0, 35.0, 36.0, 37.0, 38.0, 39.0, 40.0],
+    "Kerapatan air (g/mL)": [0.9982, 0.9980, 0.9978, 0.9976, 0.9973, 0.9971, 0.9968, 0.9965, 0.9964, 0.9963, 0.9960, 0.9957, 0.9954, 0.9951, 0.9947, 0.9944, 0.9941, 0.9937, 0.9934, 0.9930, 0.9026, 0.9922],}
     df = pd.DataFrame(data)
 
 #pembuatan tampilan tabel pada web
-    st.write("Tabel Kerapatan Air (g/mL):")
+    st.write("Tabel Kerapatan Air:")
     st.table(df)
